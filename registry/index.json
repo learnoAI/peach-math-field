@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "peach-math-field",
-  "homepage": "https://github.com/peach-math-field/peach-math-field",
+  "homepage": "https://github.com/learnoAI/peach-math-field",
   "items": [
     {
       "name": "math-field",

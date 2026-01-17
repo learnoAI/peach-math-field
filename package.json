@@ -57,10 +57,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peach-math-field/peach-math-field.git"
+    "url": "git+https://github.com/learnoAI/peach-math-field.git"
   },
   "bugs": {
-    "url": "https://github.com/peach-math-field/peach-math-field/issues"
+    "url": "https://github.com/learnoAI/peach-math-field/issues"
   },
-  "homepage": "https://github.com/peach-math-field/peach-math-field#readme"
+  "homepage": "https://github.com/learnoAI/peach-math-field#readme"
 }
