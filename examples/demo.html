@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>peach-math-field Demo</title>
+
+  <!-- KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+
+  <!-- Our styles -->
+  <style>
+    /* shadcn-like theme variables */
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+      --muted: 210 40% 96%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+      --border: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+      --destructive: 0 84.2% 60.2%;
+      --radius: 0.5rem;
+    }
+
+    /* Dark mode */
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+      --border: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+      --destructive: 0 62.8% 30.6%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid hsl(var(--border));
+      padding-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 2rem;
+    }
+
+    .example {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: hsl(var(--muted));
+      border-radius: var(--radius);
+    }
+
+    .example-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .example-latex {
+      font-family: monospace;
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      background: hsl(var(--background));
+      border-radius: calc(var(--radius) - 2px);
+      overflow-x: auto;
+    }
+
+    .example-render {
+      padding: 1rem;
+      background: hsl(var(--background));
+      border-radius: calc(var(--radius) - 2px);
+      text-align: center;
+    }
+
+    .inline-example {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: hsl(var(--muted));
+      border-radius: var(--radius);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      background: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .theme-toggle:hover {
+      opacity: 0.9;
+    }
+
+    /* Math field preview styles */
+    .math-field-preview {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.5rem;
+      padding: 0.5rem 0.75rem;
+      background: hsl(var(--background));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius);
+    }
+
+    .math-field-preview:focus-within {
+      outline: none;
+      border-color: hsl(var(--primary));
+      box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+    }
+
+    .cursor-preview {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: hsl(var(--primary));
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+
+  <!-- KaTeX JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"></script>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+  <h1>peach-math-field</h1>
+  <p class="subtitle">A shadcn-native, highly customizable math editor</p>
+
+  <h2>Display Mode (Block)</h2>
+
+  <div class="example">
+    <div class="example-label">Quadratic Formula</div>
+    <div class="example-latex">\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</div>
+    <div class="example-render" id="quadratic"></div>
+  </div>
+
+  <div class="example">
+    <div class="example-label">Euler's Identity</div>
+    <div class="example-latex">e^{i\pi} + 1 = 0</div>
+    <div class="example-render" id="euler"></div>
+  </div>
+
+  <div class="example">
+    <div class="example-label">Summation</div>
+    <div class="example-latex">\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}</div>
+    <div class="example-render" id="summation"></div>
+  </div>
+
+  <div class="example">
+    <div class="example-label">Integral</div>
+    <div class="example-latex">\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}</div>
+    <div class="example-render" id="integral"></div>
+  </div>
+
+  <div class="example">
+    <div class="example-label">Matrix</div>
+    <div class="example-latex">\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}</div>
+    <div class="example-render" id="matrix"></div>
+  </div>
+
+  <div class="example">
+    <div class="example-label">Maxwell's Equation</div>
+    <div class="example-latex">\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}</div>
+    <div class="example-render" id="maxwell"></div>
+  </div>
+
+  <h2>Inline Mode</h2>
+
+  <div class="inline-example">
+    <p>
+      The Pythagorean theorem states that <span id="inline1"></span> for a right triangle.
+      Einstein's famous equation <span id="inline2"></span> relates mass and energy.
+    </p>
+  </div>
+
+  <h2>MathField Preview (Coming Soon)</h2>
+
+  <div class="example">
+    <div class="example-label">Editor with cursor</div>
+    <div class="math-field-preview">
+      <span id="field-content"></span><span class="cursor-preview"></span>
+    </div>
+  </div>
+
+  <h2>Error Handling</h2>
+
+  <div class="example">
+    <div class="example-label">Invalid LaTeX</div>
+    <div class="example-latex">\frac{1}{</div>
+    <div class="example-render" id="error"></div>
+  </div>
+
+  <script>
+    // Wait for KaTeX to load
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(renderAll, 100);
+    });
+
+    function renderAll() {
+      if (typeof katex === 'undefined') {
+        setTimeout(renderAll, 100);
+        return;
+      }
+
+      // Display mode examples
+      render('quadratic', '\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}', true);
+      render('euler', 'e^{i\\pi} + 1 = 0', true);
+      render('summation', '\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}', true);
+      render('integral', '\\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}', true);
+      render('matrix', '\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} ax + by \\\\ cx + dy \\end{pmatrix}', true);
+      render('maxwell', '\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}', true);
+
+      // Inline examples
+      render('inline1', 'a^2 + b^2 = c^2', false);
+      render('inline2', 'E = mc^2', false);
+
+      // Field content
+      render('field-content', 'x^2 + ', false);
+
+      // Error example
+      render('error', '\\frac{1}{', true);
+    }
+
+    function render(id, latex, displayMode) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      try {
+        katex.render(latex, el, {
+          displayMode: displayMode,
+          throwOnError: false,
+          errorColor: '#dc2626'
+        });
+      } catch (e) {
+        el.innerHTML = `<span style="color: #dc2626">${e.message}</span>`;
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>

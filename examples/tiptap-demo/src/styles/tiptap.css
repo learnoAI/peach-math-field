@@ -1,0 +1,191 @@
+/**
+ * Tiptap Editor Styles
+ */
+
+/* Editor Container */
+.tiptap-editor-container {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--background));
+  overflow: hidden;
+}
+
+/* Menu Bar */
+.tiptap-menu-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+}
+
+.menu-group {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.menu-divider {
+  width: 1px;
+  height: 1.5rem;
+  background: hsl(var(--border));
+  margin: 0 0.25rem;
+}
+
+.menu-spacer {
+  flex: 1;
+}
+
+.math-button {
+  font-weight: 500;
+}
+
+/* Editor Content */
+.tiptap-content {
+  min-height: 300px;
+  padding: 1rem;
+}
+
+.tiptap-content .tiptap {
+  outline: none;
+  min-height: 280px;
+}
+
+/* Placeholder */
+.tiptap-content .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+/* Typography */
+.tiptap-content .tiptap h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+  line-height: 1.2;
+}
+
+.tiptap-content .tiptap h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+  line-height: 1.3;
+}
+
+.tiptap-content .tiptap h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  line-height: 1.4;
+}
+
+.tiptap-content .tiptap p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+
+.tiptap-content .tiptap ul,
+.tiptap-content .tiptap ol {
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.tiptap-content .tiptap li {
+  margin: 0.25rem 0;
+}
+
+.tiptap-content .tiptap blockquote {
+  border-left: 3px solid hsl(var(--border));
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: hsl(var(--muted-foreground));
+}
+
+.tiptap-content .tiptap hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border));
+  margin: 1.5rem 0;
+}
+
+.tiptap-content .tiptap code {
+  background: hsl(var(--muted));
+  padding: 0.125rem 0.25rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.tiptap-content .tiptap pre {
+  background: hsl(var(--muted));
+  padding: 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.tiptap-content .tiptap pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Math Node Styles */
+.math-node-wrapper {
+  cursor: pointer;
+}
+
+.math-node-display {
+  display: inline-block;
+  padding: 0.125rem 0.25rem;
+  border-radius: calc(var(--radius) - 2px);
+  transition: background-color 0.15s ease;
+}
+
+.math-node-display:hover {
+  background: hsl(var(--muted));
+}
+
+.math-node-selected {
+  background: hsl(var(--primary) / 0.1);
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 1px;
+}
+
+.math-node-placeholder {
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  padding: 0.25rem 0.5rem;
+  background: hsl(var(--muted));
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px dashed hsl(var(--border));
+}
+
+.math-node-editor {
+  display: inline-block;
+  position: relative;
+}
+
+.math-node-field {
+  min-width: 100px;
+}
+
+.math-node-keyboard-container {
+  position: fixed;
+  z-index: 9999;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius);
+}
+
+/* Editor Wrapper */
+.editor-wrapper {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode adjustments */
+.dark .math-node-keyboard-container {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "math-field",
+  "type": "registry:component",
+  "title": "Math Field",
+  "description": "An interactive math editor component with LaTeX support",
+  "dependencies": [
+    "katex"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/math-field.tsx",
+      "type": "registry:component",
+      "content": ""
+    },
+    {
+      "path": "components/math-display.tsx",
+      "type": "registry:component",
+      "content": ""
+    },
+    {
+      "path": "components/math-keyboard.tsx",
+      "type": "registry:component",
+      "content": ""
+    },
+    {
+      "path": "styles/math-field.css",
+      "type": "registry:style",
+      "content": ""
+    }
+  ],
+  "cssVars": {
+    "light": {},
+    "dark": {}
+  },
+  "meta": {
+    "importSpecifier": "peach-math-field",
+    "moduleResolution": "bundler"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "peach-math-field",
+  "homepage": "https://github.com/peach-math-field/peach-math-field",
+  "items": [
+    {
+      "name": "math-field",
+      "type": "registry:component",
+      "title": "Math Field",
+      "description": "Interactive math editor with LaTeX support, cursor navigation, and virtual keyboard"
+    },
+    {
+      "name": "math-display",
+      "type": "registry:component",
+      "title": "Math Display",
+      "description": "Read-only math renderer using KaTeX"
+    },
+    {
+      "name": "math-keyboard",
+      "type": "registry:component",
+      "title": "Math Keyboard",
+      "description": "Virtual keyboard for math input with tabs for Greek letters, operators, matrices, and more"
+    }
+  ]
+}
